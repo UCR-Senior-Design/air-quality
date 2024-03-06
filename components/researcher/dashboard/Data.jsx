@@ -3,6 +3,7 @@ import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 // import { useState } from "react";
@@ -10,6 +11,8 @@ import {
 // import Dropdown from "./Dropdown";
 import Link from "next/link";
 import Tag from "../Tag";
+import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
+import { TbArrowsSort } from "react-icons/tb";
 import { GoArrowRight } from "react-icons/go";
 
 const columns = [
@@ -102,6 +105,10 @@ const Data = ({ data }) => {
     // },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    initialState: {
+      sorting: [],
+    },
   });
 
   // const options = [
@@ -135,7 +142,18 @@ const Data = ({ data }) => {
           <div key={id} className="flex">
             {headers.map(({ id, column }) => (
               <div key={id} className="w-2/12 p-1 m-2">
-                {column.columnDef.header}
+                <span>{column.columnDef.header}</span>
+                <button onClick={() => column.toggleSorting?.()}>
+                  {column.getIsSorted() ? (
+                    column.getIsSorted() === "desc" ? (
+                      <FaSortAlphaDown />
+                    ) : (
+                      <FaSortAlphaUp />
+                    )
+                  ) : (
+                    <TbArrowsSort />
+                  )}
+                </button>
               </div>
             ))}
           </div>

@@ -2,6 +2,7 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Marker from "@/components/Marker";
+import Legend from "@/components/Map/Legend"
 
 const Map = ({ height, width, markers }) => {
   const position = [34.056, -117.5981];
@@ -30,6 +31,7 @@ const Map = ({ height, width, markers }) => {
           measurements={measurements}
         />
       ))}
+      <Legend />
     </MapContainer>
   );
 };
